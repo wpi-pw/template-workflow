@@ -6,6 +6,10 @@
 
 source ${PWD}/lib/app-init.sh
 
+printf "${GRN}=========================================${NC}\n"
+printf "${GRN}Running workflow $conf_app_setup_workflow${NC}\n"
+printf "${GRN}=========================================${NC}\n"
+
 if [ "$conf_app_setup_workflow" == "bedrock" ]; then
     # Clone the repo
     curl -LOks https://github.com/roots/bedrock/archive/master.zip
