@@ -16,6 +16,7 @@ if [ "$conf_app_setup_workflow" == "bedrock" ]; then
     # Unzip the repo
     unzip -q master.zip
     # Prepare the project
+    mv bedrock-master/.env.example .
     mv bedrock-master/config .
     mv bedrock-master/web .
     mv bedrock-master/composer.json .
@@ -35,6 +36,7 @@ elif [ "$conf_app_setup_workflow" == "cdk-comp/bedrock" ]; then
     # Unzip the repo
     unzip -q master.zip
     # Prepare the project
+    mv bedrock-master/.env.example .
     mv bedrock-master/config .
     mv bedrock-master/web .
     mv bedrock-master/composer.json .
@@ -54,6 +56,7 @@ elif [ "$conf_app_setup_workflow" == "cdkrock" ]; then
     # Unzip the repo
     unzip -q master.zip
     # Prepare the project
+    mv bedrock-master/.env.example .
     mv cdkrock-master/config .
     mv cdkrock-master/web .
     mv cdkrock-master/composer.json .
