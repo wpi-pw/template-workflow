@@ -45,7 +45,7 @@ elif [ "$conf_app_setup_workflow" == "cdk-comp/bedrock" ]; then
     rm -rf bedrock-master master.zip
     # Setup WordPress version from config
     if [ "$conf_app_setup_wordpress" != "*" ]; then
-        composer require johnpbloch/wordpress:$conf_app_setup_wordpress --update-no-dev
+        composer require roots/wordpress:$conf_app_setup_wordpress --update-no-dev
     else
         # Runing installation via composer
         composer install --no-dev
