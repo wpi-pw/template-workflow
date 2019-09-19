@@ -46,3 +46,8 @@ if [ "$conf_vm_box" == "wpi/box" ]; then
   sudo mv /var/www /var/www-disabled 2>/dev/null
   sudo ln -s /home/vagrant/apps /var/www
 fi
+
+echo "=============================="
+echo "Delete self"
+echo "=============================="
+rm -- "$0"
