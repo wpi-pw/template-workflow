@@ -73,5 +73,8 @@ function continue_error {
 }
 trap 'continue_error' ERR
 
-# Read config
-eval $(parse_yaml $wpi_conf "wpi_")
+# Read configs
+for i in "${!wpi_confs[@]}"; do
+  conf_name=$(echo "${wpi_confs[$i]##*/}" | cut -d'-' -f 2 | cut -d'.' -f 1)
+  eval $(parse_yaml ${wpi_confs[$i]} "wpi_${conf_name}_")
+done
