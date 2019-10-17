@@ -74,4 +74,4 @@ function continue_error {
 trap 'continue_error' ERR
 
 # Read config
-eval $(parse_yaml $wpi_config "conf_")
+#eval $(parse_yaml $wpi_config "conf_")
