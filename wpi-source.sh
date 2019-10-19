@@ -60,11 +60,33 @@ noroot() {
   sudo -EH -u "vagrant" "$@";
 }
 
-# runner for downloaded script and removing after complete
-runner() {
+# get current environment or return default
+get_cur_env() {
+  if [ -z "$1" ]; then
+    cur_env="local"
+  else
+    cur_env=$1
+  fi
+}
+
+# Download and run the script with auto removing after complete
+template_runner() {
+  template=$1
+  script_url=$2
+  arg=$3
+  cur_env=$4
+
+  # Template downloader
+  if [ "$template" == "default" ]; then
+      curl --silent $script_url > tmp-template.sh
+    echo ''
+  else
+      curl --silent $template > tmp-template.sh
+  fi
+
   # If template downloaded, run the script
   if [ -f "${PWD}/tmp-template.sh" ]; then
-      bash ${PWD}/tmp-template.sh $1
+      bash ${PWD}/tmp-template.sh $cur_env
       # delete the script after complete
       rm ${PWD}/tmp-template.sh
   fi

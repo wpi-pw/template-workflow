@@ -60,18 +60,10 @@ elif [ "$wpi_init_workflow" == "cdk-comp/bedrock" ]; then
   fi
 elif [ "$wpi_init_workflow" == "wp-cli" ]; then
   # Get current env from arg if exist
-  if [ -z "$1" ]; then
-    wpi_db_name="wpi_env_local_db_name"
-    wpi_db_user="wpi_env_local_db_user"
-    wpi_db_pass="wpi_env_local_db_pass"
-    wpi_db_prefix="wpi_env_local_db_prefix"
-  else
-    wpi_db_name="wpi_env_$1_db_name"
-    wpi_db_user="wpi_env_$1_db_user"
-    wpi_db_pass="wpi_env_$1_db_pass"
-    wpi_db_prefix="wpi_env_$1_db_prefix"
-  fi
-  echo "${!env_db_name}"
+  wpi_db_name="wpi_env_$1_db_name"
+  wpi_db_user="wpi_env_$1_db_user"
+  wpi_db_pass="wpi_env_$1_db_pass"
+  wpi_db_prefix="wpi_env_$1_db_prefix"
   # Setup WordPress version from config
   if [ "$wpi_init_wordpress" != "*" ]; then
       wp_version="--version=$wpi_init_wordpress"
