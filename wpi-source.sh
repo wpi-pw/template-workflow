@@ -69,26 +69,37 @@ get_cur_env() {
   fi
 }
 
+# url path builder
+url_path() {
+  template_path=$1
+  repo=$(echo ${template_path} | cut -d"/" -f1)
+  file_name=$(echo ${template_path} | cut -d"/" -f2)
+  echo "https://raw.githubusercontent.com/wpi-pw/$repo/master/$file_name.sh"
+}
+
 # download and run the script with auto removing after complete
 template_runner() {
   template=$1
-  script_url=$2
-  arg=$3
+  script_url=$(url_path $2)
+  template_conf=$3
   cur_env=$4
 
-  # Template downloader
-  if [ "$template" == "default" ]; then
-      curl --silent $script_url > tmp-template.sh
-    echo ''
-  else
-      curl --silent $template > tmp-template.sh
-  fi
+  # check template config status
+  if [ "$template_conf" != "false" ]; then
+    # Template downloader
+    if [ "$template" == "default" ]; then
+        curl --silent $script_url > tmp-template.sh
+      echo ''
+    else
+        curl --silent $template > tmp-template.sh
+    fi
 
-  # If template downloaded, run the script
-  if [ -f "${PWD}/tmp-template.sh" ]; then
-      bash ${PWD}/tmp-template.sh $cur_env
-      # delete the script after complete
-      rm ${PWD}/tmp-template.sh
+    # If template downloaded, run the script
+    if [ -f "${PWD}/tmp-template.sh" ]; then
+        bash ${PWD}/tmp-template.sh $cur_env
+        # delete the script after complete
+        rm ${PWD}/tmp-template.sh
+    fi
   fi
 }
 
