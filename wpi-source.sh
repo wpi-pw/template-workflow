@@ -61,7 +61,7 @@ noroot() {
 }
 
 # runner for downloaded script and removing after complete
-function runner () {
+runner() {
   # If template downloaded, run the script
   if [ -f "${PWD}/tmp-template.sh" ]; then
       bash ${PWD}/tmp-template.sh $1
@@ -72,7 +72,7 @@ function runner () {
 
 # ERROR Handler
 # ask user to continue on error
-function continue_error {
+continue_error() {
   read -p "$(echo -e "${RED}Do you want to continue anyway? (y/n) ${NC}")" -n 1 -r
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     printf "\n${RED}»»» aborting WPI app setup! ${NC}\n"
