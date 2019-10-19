@@ -60,6 +60,16 @@ noroot() {
   sudo -EH -u "vagrant" "$@";
 }
 
+# runner for downloaded script and removing after complete
+function runner () {
+  # If template downloaded, run the script
+  if [ -f "${PWD}/tmp-template.sh" ]; then
+      bash ${PWD}/tmp-template.sh $1
+      # delete the script after complete
+      rm ${PWD}/tmp-template.sh
+  fi
+}
+
 # ERROR Handler
 # ask user to continue on error
 function continue_error {
