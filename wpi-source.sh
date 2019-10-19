@@ -69,7 +69,7 @@ get_cur_env() {
   fi
 }
 
-# Download and run the script with auto removing after complete
+# download and run the script with auto removing after complete
 template_runner() {
   template=$1
   script_url=$2
@@ -90,6 +90,13 @@ template_runner() {
       # delete the script after complete
       rm ${PWD}/tmp-template.sh
   fi
+}
+
+# dynamic key helper
+wpi_key() {
+  key_sufix=$1
+  wpi_key=$cur_wpi$key_sufix
+  echo ${!wpi_key}
 }
 
 # ERROR Handler
