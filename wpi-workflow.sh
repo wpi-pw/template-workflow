@@ -33,10 +33,10 @@ if [ "$wpi_init_workflow" == "bedrock" ]; then
   rm -rf bedrock-master master.zip
   # Setup WordPress version from config
   if [ "$wpi_init_wordpress" != "*" ]; then
-      composer require roots/wordpress:$wpi_init_wordpress --update-no-dev
+      composer require roots/wordpress:$wpi_init_wordpress --update-no-dev --quiet
   else
       # Runing installation via composer
-      composer install --no-dev
+      composer install --no-dev --quiet
   fi
 elif [ "$wpi_init_workflow" == "cdk-comp/bedrock" ]; then
   # Clone the repo
@@ -53,10 +53,10 @@ elif [ "$wpi_init_workflow" == "cdk-comp/bedrock" ]; then
   rm -rf bedrock-master master.zip
   # Setup WordPress version from config
   if [ "$wpi_init_wordpress" != "*" ]; then
-      composer require roots/wordpress:$wpi_init_wordpress --update-no-dev
+      composer require roots/wordpress:$wpi_init_wordpress --update-no-dev --quiet
   else
       # Runing installation via composer
-      composer install --no-dev
+      composer install --no-dev --quiet
   fi
 elif [ "$wpi_init_workflow" == "wp-cli" ]; then
   # Get current env from arg if exist
