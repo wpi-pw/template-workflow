@@ -110,6 +110,24 @@ wpi_key() {
   echo ${!wpi_key}
 }
 
+# helper for yq parser
+wpi_yq() {
+  key=$1
+  # get config files
+  for i in "${!wpi_confs[@]}";
+  do
+    # clean config path
+    conf_name=$(echo "${wpi_confs[$i]##*/}" | cut -d'-' -f 2 | cut -d'.' -f 1)
+    # get curent config name
+    cur_conf=$(echo ${key} | cut -d"." -f1)
+    # prepare config key
+    conf_key=${key//$cur_conf./}
+    if [ "$conf_name" == "$cur_conf" ]; then
+      yq r ${wpi_confs[$i]} $conf_key
+    fi
+  done
+}
+
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
