@@ -129,6 +129,26 @@ wpi_yq() {
   done
 }
 
+# helper for shell scripts array
+shell_runner() {
+  shell_array=$1
+
+  # Create array of scripts
+  mapfile -t shell_scripts < <( wpi_yq shell.$shell_array )
+
+  # Run shell runner after app install
+  if [ "$(wpi_yq init.shell)" == "true" ]; then
+    for script in "${shell_scripts[@]}"
+    do
+      if [ "$script" != "null" ]; then
+        # prepare the url before run
+        script_url=${script:2}
+        bash <(curl -s $(url_path "template-workflow/wpi-shell")) $script_url
+      fi
+    done
+  fi
+}
+
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
