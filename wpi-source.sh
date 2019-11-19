@@ -64,9 +64,9 @@ noroot() {
 # get current environment or return default
 get_cur_env() {
   if [ -z "$1" ]; then
-    cur_env="local"
+    local
   else
-    cur_env=$1
+    $1
   fi
 }
 
