@@ -10,6 +10,7 @@ GRN='\033[0;32m' # success
 BLU='\033[0;34m' # task
 BRN='\033[0;33m' # headline
 NC='\033[0m'     # no color
+script_url="" # script_url var reset
 
 # YAML parser function
 parse_yaml() {
