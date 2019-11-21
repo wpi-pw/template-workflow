@@ -149,6 +149,34 @@ shell_runner() {
   fi
 }
 
+# symlinks creator
+wpi_dir_symlinks() {
+  symlinks_path=${PWD}
+  wpi_symlink=$1
+  wpi_workflow_path="wp-content"
+  # symlinks for bedrock workflow
+  if [ "$(wpi_yq init.workflow)" == "bedrock" ]; then
+    wpi_workflow_path="app"
+  fi
+  # create storage directory if not exist
+  if [ ! -d "$symlinks_path/../../storage" ]; then
+    mkdir $symlinks_path/../../storage
+  fi
+  # remove the symlink if exist
+  if [ -L "$symlinks_path/web/$wpi_workflow_path/$wpi_symlink" ]; then
+    rm $symlinks_path/web/$wpi_workflow_path/$wpi_symlink
+  fi
+  # move uploads firectory to storage if exist
+  if [ -d "$symlinks_path/web/$wpi_workflow_path/$wpi_symlink" ]; then
+    mv $symlinks_path/web/$wpi_workflow_path/$wpi_symlink $symlinks_path/../../storage
+  fi
+  if [ ! -d "$symlinks_path/../../storage/$wpi_symlink" ]; then
+    mkdir $symlinks_path/../../storage/$wpi_symlink
+  fi
+  # create symlinks for uploads to the storage directory if not exist
+  ln -s $symlinks_path/../../storage/$wpi_symlink $symlinks_path/web/$wpi_workflow_path/$wpi_symlink
+}
+
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
