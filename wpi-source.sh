@@ -114,6 +114,7 @@ wpi_key() {
 # helper for yq parser
 wpi_yq() {
   key=$1
+  output_keys=$2
   # get config files
   for i in "${!wpi_confs[@]}";
   do
@@ -123,7 +124,10 @@ wpi_yq() {
     cur_conf=$(echo ${key} | cut -d"." -f1)
     # prepare config key
     conf_key=${key//$cur_conf./}
-    if [ "$conf_name" == "$cur_conf" ]; then
+    if [ "$conf_name" == "$cur_conf" ] && [ "$output_keys" == "keys" ]; then
+      # output keys only
+      yq r ${wpi_confs[$i]} $conf_key | sed -n -e '/^\([^ ]\([^:]\+\)\?\):/  s/:.*// p'
+    elif [ "$conf_name" == "$cur_conf" ]; then
       yq r ${wpi_confs[$i]} $conf_key
     fi
   done
