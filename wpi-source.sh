@@ -184,8 +184,11 @@ wpi_dir_symlinks() {
     if [ -L "$symlinks_path/web/$wpi_workflow_path/$wpi_symlink" ]; then
       rm $symlinks_path/web/$wpi_workflow_path/$wpi_symlink
     fi
-    # move uploads firectory to storage if exist
-    if [ -d "$symlinks_path/web/$wpi_workflow_path/$wpi_symlink" ]; then
+    # remove uploads if release uploads directory exist
+    if [ -d "$symlinks_path$app_content/$wpi_symlink" ]; then
+      rm -rf $symlinks_path/web/$wpi_workflow_path/$wpi_symlink
+    elif [ -d "$symlinks_path/web/$wpi_workflow_path/$wpi_symlink" ]; then
+      # move uploads firectory to storage if exist
       mv $symlinks_path/web/$wpi_workflow_path/$wpi_symlink $symlinks_path$app_content
     fi
     # make storage directory if not exist
