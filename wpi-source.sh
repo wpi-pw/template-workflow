@@ -61,6 +61,11 @@ noroot() {
   sudo -EH -u "vagrant" "$@";
 }
 
+# global current environment via wpi-env.yml
+cur_env() {
+  echo $(yq r "${PWD}/wpi-env.yml" cur_env)
+}
+
 # get current environment or return default
 get_cur_env() {
   if [ -z "$1" ]; then
@@ -136,6 +141,12 @@ wpi_yq() {
 # helper for shell scripts array
 shell_runner() {
   shell_array=$1
+  cur_env=$2
+
+  # create yml with current environment
+  if [ "$shell_array" == "before_install" ]; then
+    touch env.yml && echo "cur_env: $cur_env" > wpi-env.yml
+  fi
 
   # Create array of scripts
   mapfile -t shell_scripts < <( wpi_yq shell.$shell_array )
@@ -157,7 +168,7 @@ shell_runner() {
 wpi_dir_symlinks() {
   symlinks_path=${PWD}
   wpi_symlink=$1
-  cur_env=$2
+  cur_env=$(cur_env)
   app_content=$(wpi_yq "env.$cur_env.app_content")
   wpi_workflow_path="wp-content"
   if [ "$cur_env" != "local" ] && [ "$cur_env" != "dev" ]; then
