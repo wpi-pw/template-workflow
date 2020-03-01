@@ -32,7 +32,7 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   # Clean zip and cloned directory
   rm -rf bedrock-master master.zip
   # Setup WordPress version from config
-  if [ "$(wpi_yq init.wordpress)" != "null" ] && [ "$(wpi_yq init.wordpress)" != "*" ]; then
+  if [ "$(wpi_yq init.wordpress)" != "null" ] && [ "$(wpi_yq init.wordpress)" ] && [ "$(wpi_yq init.wordpress)" != "*" ]; then
       composer require roots/wordpress:$(wpi_yq init.wordpress) --update-no-dev --quiet
   else
       # Runing installation via composer

@@ -155,7 +155,7 @@ shell_runner() {
   if [ "$(wpi_yq init.shell)" == "true" ]; then
     for script in "${shell_scripts[@]}"
     do
-      if [ "$script" != "null" ]; then
+      if [ "$script" != "null" ] && [ "$script" ]; then
         # prepare the url before run
         script_url=${script:2}
         bash <(curl -s $(url_path "template-workflow/wpi-shell")) $script_url
