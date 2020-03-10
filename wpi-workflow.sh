@@ -14,6 +14,8 @@ done
 # Get wpi-source for yml parsing, noroot, errors etc
 source <(curl -s https://raw.githubusercontent.com/wpi-pw/template-workflow/master/wpi-source.sh)
 
+cur_env=$(cur_env)
+
 printf "${GRN}========================================${NC}\n"
 printf "${GRN}Running workflow $(wpi_yq init.workflow)${NC}\n"
 printf "${GRN}========================================${NC}\n"
@@ -31,6 +33,10 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   mv bedrock-master/wp-cli.yml .
   # Clean zip and cloned directory
   rm -rf bedrock-master master.zip
+  # Remove MU Plugin Disallow Indexing if not DEV or Staging
+  if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ]; then
+    rm ${PWD}/web/app/mu-plugins/disallow-indexing.php
+  fi
   # Setup WordPress version from config
   if [ "$(wpi_yq init.wordpress)" != "null" ] && [ "$(wpi_yq init.wordpress)" ] && [ "$(wpi_yq init.wordpress)" != "*" ]; then
       composer require roots/wordpress:$(wpi_yq init.wordpress) --update-no-dev --quiet
