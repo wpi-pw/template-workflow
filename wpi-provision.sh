@@ -7,7 +7,7 @@
 # File version 1.1.2
 
 # Define custom config if exist
-if [[ -f wpi-custom.yml ]]; then
+if [[ -f config/wpi-custom.yml ]]; then
 	wpi_config="/home/vagrant/config/wpi-custom.yml"
 else
   wpi_config="/home/vagrant/config/wpi-default.yml"
@@ -19,7 +19,7 @@ source <(curl -s https://raw.githubusercontent.com/wpi-pw/template-workflow/mast
 if [ "$conf_vm_box" == "wpi/box" ]; then
   # Basic provison for new box
   echo "=============================="
-  echo "You can replace $conf_wpi_user with your username & $conf_wpi_email by your email in wpi-config.yml"
+  echo "You can replace $conf_wpi_user with your username & $conf_wpi_email by your email in $wpi_config"
   echo "=============================="
   sudo chown vagrant:vagrant /home/vagrant/.[^.]*
   sudo echo -e "source ~/.bashrc\n" >> /home/vagrant/.bash_profile 2>/dev/null
@@ -36,9 +36,8 @@ if [ "$conf_vm_box" == "wpi/box" ]; then
   echo "=============================="
   ssh-keyscan -H bitbucket.org >> /home/vagrant/.ssh/known_hosts 2>/dev/null
   ssh-keyscan -H github.com >> /home/vagrant/.ssh/known_hosts 2>/dev/null
-  sudo cp -r /home/vagrant/.ssh /home/vagrant/apps/.ssh
-  sudo chown -R www-data:www-data /home/vagrant/apps/.ssh
-
+  sudo cp -r /home/vagrant/.ssh /home/vagrant/apps/.ssh 2>/dev/null
+#
   echo "=============================="
   echo "move files to vagrant apps and make the symlink"
   echo "=============================="
