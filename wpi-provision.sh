@@ -41,7 +41,7 @@ if [ "$conf_vm_box" == "wpi/box" ]; then
   echo "=============================="
   echo "move files to vagrant apps and make the symlink"
   echo "=============================="
-  sudo mv /var/www/{.,}* /home/vagrant/apps 2>/dev/null
+  sudo cp -r /var/www/. /home/vagrant/apps 2>/dev/null
   sudo mv /var/www /var/www-disabled 2>/dev/null
   sudo ln -s /home/vagrant/apps /var/www 2>/dev/null
 fi
