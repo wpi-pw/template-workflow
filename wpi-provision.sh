@@ -43,7 +43,7 @@ if [ "$conf_vm_box" == "wpi/box" ]; then
   echo "=============================="
   sudo mv /var/www/{.,}* /home/vagrant/apps 2>/dev/null
   sudo mv /var/www /var/www-disabled 2>/dev/null
-  sudo ln -s /home/vagrant/apps /var/www
+  sudo ln -s /home/vagrant/apps /var/www 2>/dev/null
 fi
 
 echo "=============================="
