@@ -34,7 +34,7 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   # Clean zip and cloned directory
   rm -rf bedrock-master master.zip
   # Remove MU Plugin Disallow Indexing if not DEV or Staging
-  if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ]; then
+  if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ] && [ "$(wpi_yq env.$cur_env.app_noindex)" != "true" ]; then
     rm ${PWD}/web/app/mu-plugins/disallow-indexing.php
   fi
   # Setup WordPress version from config
@@ -46,10 +46,10 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   fi
 elif [ "$(wpi_yq init.workflow)" == "wp-cli" ]; then
   # Get current env from arg if exist
-  wpi_db_name="env.$1.db_name"
-  wpi_db_user="env.$1.db_user"
-  wpi_db_pass="env.$1.db_pass"
-  wpi_db_prefix="env.$1.db_prefix"
+  wpi_db_name="env.$cur_env.db_name"
+  wpi_db_user="env.$cur_env.db_user"
+  wpi_db_pass="env.$cur_env.db_pass"
+  wpi_db_prefix="env.$cur_env.db_prefix"
   wp_version=""
 
   # Setup WordPress version from config
