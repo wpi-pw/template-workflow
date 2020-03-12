@@ -11,6 +11,12 @@ BLU='\033[0;34m' # task
 BRN='\033[0;33m' # headline
 NC='\033[0m' # no color
 
+# helper for yq parser
+wpi_yq() {
+  key=$1
+  yq r $wpi_config $key
+}
+
 # YAML parser function
 parse_yaml() {
     local yaml_file=$1

@@ -5,14 +5,14 @@
 # https://github.com/wpi-pw/app
 
 # Define custom config if exist
-if [[ -f /home/vagrant/config/wpi-custom.yml ]]; then
-	wpi_config="/home/vagrant/config/wpi-custom.yml"
+if [[ -f "/home/vagrant/config/wpi-custom.yml" ]]; then
+	wpi_confs="/home/vagrant/config/wpi-custom.yml"
 else
-  wpi_config="/home/vagrant/config/wpi-default.yml"
+  wpi_confs="/home/vagrant/config/wpi-default.yml"
 fi
 
 # Get wpi-helper for yml parsing, noroot, errors etc
-source <(curl -s https://raw.githubusercontent.com/wpi-pw/template-workflow/master/wpi-helper.sh)
+source <(curl -s https://raw.githubusercontent.com/wpi-pw/template-workflow/master/wpi-source.sh)
 
 printf "${GRN}==============================${NC}\n"
 printf "${GRN} Staring NGINX ${NC}\n"
