@@ -78,5 +78,9 @@ do
   fi
 done
 
+printf "${GRN}==============================${NC}\n"
+printf "${GRN} Displaying Vagrant apps:     ${NC}\n"
+printf "${GRN}==============================${NC}\n"
+
 # Script self destruction
-rm -- "$0"
+rm ${PWD}/wpi-up
