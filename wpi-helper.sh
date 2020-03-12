@@ -66,18 +66,5 @@ noroot() {
   sudo -EH -u "vagrant" "$@";
 }
 
-# ERROR Handler
-# ask user to continue on error
-function continue_error {
-  read -p "$(echo -e "${RED}Do you want to continue anyway? (y/n) ${NC}")" -n 1 -r
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    printf "\n${RED}»»» aborting WPI app setup! ${NC}\n"
-    exit 1
-  else
-    printf "\n${GRN}»»» continuing WPI app setup... ${NC}\n"
-  fi
-}
-trap 'continue_error' ERR
-
 # Read config
 eval $(parse_yaml $wpi_config "conf_")
