@@ -33,7 +33,7 @@ do
     printf "${GRN} $(wpi_yq apps.[$i].status) app - ${apps_host[$i]}${NC}\n"
     printf "${GRN}==============================                    ${NC}\n"
     # Enable/Disable app via WordOps
-    yes | sudo wo site $(wpi_yq apps.[$i].status) ${apps_host[$i]}
+    yes | sudo wo site $(wpi_yq apps.[$i].status) ${apps_host[$i]} --quiet
     # Change app status to enabled/disabled
     sed -i.bak "s/\bstatus: $(wpi_yq apps.[$i].status)\b/status: $(wpi_yq apps.[$i].status)d/g" $wpi_config
     printf "${GRN}==============================${NC}\n"
@@ -72,15 +72,14 @@ do
       sudo sed -i -e "s/htdocs/$new_path/g" "/etc/nginx/sites-available/${apps_host[$i]}"
       sudo service nginx reload
     fi
-    printf "${GRN}==============================${NC}\n"
-    printf "${GRN} Moving to next app...        ${NC}\n"
-    printf "${GRN}==============================${NC}\n"
+    printf "${GRN}##############################${NC}\n"
   fi
 done
 
 printf "${GRN}==============================${NC}\n"
 printf "${GRN} Displaying Vagrant apps:     ${NC}\n"
 printf "${GRN}==============================${NC}\n"
+sudo wo site list
 
 # Script self destruction
-rm ${PWD}/wpi-up
+sudo rm /home/vagrant/wpi-up
