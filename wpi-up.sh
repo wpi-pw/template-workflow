@@ -36,9 +36,7 @@ do
     yes | sudo wo site $(wpi_yq apps.[$i].status) ${apps_host[$i]} --quiet
     # Change app status to enabled/disabled
     sed -i.bak "s/\bstatus: $(wpi_yq apps.[$i].status)\b/status: $(wpi_yq apps.[$i].status)d/g" $wpi_config
-    printf "${GRN}==============================${NC}\n"
-    printf "${GRN} Moving to next app...        ${NC}\n"
-    printf "${GRN}==============================${NC}\n"
+    printf "${GRN}##############################${NC}\n"
   fi
 
   if [ "$(wpi_yq apps.[$i].status)" == "create" ]; then
