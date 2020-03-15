@@ -37,6 +37,7 @@ if [ "$conf_vm_box" == "wpi/box" ]; then
   ssh-keyscan -H bitbucket.org >> /home/vagrant/.ssh/known_hosts 2>/dev/null
   ssh-keyscan -H github.com >> /home/vagrant/.ssh/known_hosts 2>/dev/null
   sudo cp -r /home/vagrant/.ssh /home/vagrant/apps/.ssh 2>/dev/null
+  sudo cp -r /home/vagrant/.ssh /root/.ssh 2>/dev/null
 #
   echo "=============================="
   echo "move files to vagrant apps and make the symlink"
