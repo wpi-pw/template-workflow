@@ -207,6 +207,11 @@ wpi_dir_symlinks() {
   fi
 }
 
+# sync runner for wpi
+sync() {
+  bash <(curl -s -L sync.wpi.pw) && exit 1
+}
+
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
@@ -225,3 +230,10 @@ for i in "${!wpi_confs[@]}"; do
   conf_name=$(echo "${wpi_confs[$i]##*/}" | cut -d'-' -f 2 | cut -d'.' -f 1)
   eval $(parse_yaml ${wpi_confs[$i]} "wpi_${conf_name}_")
 done
+
+# Check if the function exists (bash specific)
+if declare -f "$1" > /dev/null
+then
+  # call arguments verbatim
+  "$@"
+fi
