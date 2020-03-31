@@ -178,7 +178,7 @@ wpi_dir_symlinks() {
   cur_env=$(cur_env)
   app_content=$(wpi_yq "env.$cur_env.app_content")
   wpi_workflow_path="wp-content"
-  if [ "$cur_env" != "local" ] && [ "$cur_env" != "dev" ]; then
+  if [ "$cur_env" != "local" ]; then
     # symlinks for bedrock workflow
     if [ "$(wpi_yq init.workflow)" == "bedrock" ]; then
       wpi_workflow_path="app"
