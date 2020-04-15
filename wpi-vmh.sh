@@ -22,5 +22,5 @@ sudo apt install yq unzip -y
 echo "=============================="
 echo "Default .bashrc and .profile downloading"
 echo "=============================="
-sudo wget -O /home/vagrant/.profile https://raw.githubusercontent.com/wpi-pw/ubuntu-nginx-web-server/master/var/www/.profile
-sudo wget -O /home/vagrant/.bashrc https://raw.githubusercontent.com/wpi-pw/ubuntu-nginx-web-server/master/var/www/.bashrc
+sudo wget -q -O /home/vagrant/.profile https://raw.githubusercontent.com/wpi-pw/ubuntu-nginx-web-server/master/var/www/.profile
+sudo wget -q -O /home/vagrant/.bashrc https://raw.githubusercontent.com/wpi-pw/ubuntu-nginx-web-server/master/var/www/.bashrc
