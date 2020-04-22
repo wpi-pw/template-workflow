@@ -12,10 +12,6 @@ BRN='\033[0;33m' # headline
 NC='\033[0m'     # no color
 script_url="" # script_url var reset
 
-# text font weight
-bold=$(tput bold)
-normal=$(tput sgr0)
-
 # YAML parser function
 parse_yaml() {
     local yaml_file=$1
