@@ -172,7 +172,7 @@ wpi_dir_symlinks() {
   symlinks_path=${PWD}
   wpi_symlink=$1
   cur_env=$(cur_env)
-  app_content=$(wpi_yq "env.$cur_env.app_content")
+  app_content="/../../storage/"
   wpi_workflow_path="wp-content"
   if [ "$cur_env" != "local" ]; then
     # symlinks for bedrock workflow
