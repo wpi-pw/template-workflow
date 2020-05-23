@@ -208,6 +208,11 @@ sync() {
   bash <(curl -s -L sync.wpi.pw) && exit 1
 }
 
+# theme release script for wpi
+theme_release() {
+  bash <(curl -s -L wpi.pw/bin/themes/release.sh) && exit 1
+}
+
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
