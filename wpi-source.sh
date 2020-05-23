@@ -210,7 +210,7 @@ sync() {
 
 # theme release script for wpi
 theme_release() {
-  bash <(curl -s -L wpi.pw/bin/themes/release.sh)
+  bash <(curl -s -L wpi.pw/bin/themes/release.sh) && exit
 }
 
 # ERROR Handler
