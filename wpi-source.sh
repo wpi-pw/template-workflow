@@ -216,6 +216,8 @@ theme_release() {
 # ERROR Handler
 # ask user to continue on error
 continue_error() {
+  printf "\n${RED}»»» ERROR »»» aborting WPI app setup! ${NC}\n" && exit 1
+
   read -p "$(echo -e "${RED}Do you want to continue anyway? (y/n) ${NC}")" -n 1 -r
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     printf "\n${RED}»»» aborting WPI app setup! ${NC}\n"
