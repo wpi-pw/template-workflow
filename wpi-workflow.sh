@@ -33,10 +33,6 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   mv bedrock-master/wp-cli.yml .
   # Clean zip and cloned directory
   rm -rf bedrock-master master.zip
-  # Remove MU Plugin Disallow Indexing if not DEV or Staging
-  if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ] && [ "$(wpi_yq env.$cur_env.app_noindex)" != "true" ]; then
-    rm -rf ${PWD}/web/app/mu-plugins/bedrock-disallow-indexing
-  fi
   # Setup WordPress version from config
   if [ "$(wpi_yq init.wordpress)" != "null" ] && [ "$(wpi_yq init.wordpress)" ] && [ "$(wpi_yq init.wordpress)" != "*" ]; then
       composer require roots/wordpress:$(wpi_yq init.wordpress) --update-no-dev --quiet
@@ -44,6 +40,10 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
       # Runing installation via composer
       composer install --no-dev --quiet
   fi
+  # Remove MU Plugin Disallow Indexing if not DEV or Staging
+  if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ] && [ "$(wpi_yq env.$cur_env.app_noindex)" != "true" ]; then
+    rm -rf ${PWD}/web/app/mu-plugins/bedrock-disallow-indexing
+  fi  
 elif [ "$(wpi_yq init.workflow)" == "wp-cli" ]; then
   # Get current env from arg if exist
   wpi_db_name="env.$cur_env.db_name"
