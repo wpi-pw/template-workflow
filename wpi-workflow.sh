@@ -35,7 +35,7 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   rm -rf bedrock-master master.zip
   # Remove MU Plugin Disallow Indexing if not DEV or Staging
   if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ] && [ "$(wpi_yq env.$cur_env.app_noindex)" != "true" ]; then
-    rm ${PWD}/web/app/mu-plugins/bedrock-disallow-indexing.php
+    rm -rf ${PWD}/web/app/mu-plugins/bedrock-disallow-indexing
   fi
   # Setup WordPress version from config
   if [ "$(wpi_yq init.wordpress)" != "null" ] && [ "$(wpi_yq init.wordpress)" ] && [ "$(wpi_yq init.wordpress)" != "*" ]; then
