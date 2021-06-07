@@ -148,7 +148,7 @@ shell_runner() {
   # create yml with current environment
   if [ "$shell_array" == "before_install" ]; then
     cur_env=$2
-    echo "cur_env: $cur_env" > wpi-env.yml
+    echo "cur_env: $cur_env" > ${PWD}/wpi-env.yml
   fi
 
   # Create array of scripts
