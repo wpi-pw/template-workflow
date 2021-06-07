@@ -42,7 +42,7 @@ if [ "$(wpi_yq init.workflow)" == "bedrock" ] && ! [ -d ${PWD}/web ]; then
   fi
   # Remove MU Plugin Disallow Indexing if not DEV or Staging
   if [ "$cur_env" != "development" ] && [ "$cur_env" != "staging" ] && [ "$(wpi_yq env.$cur_env.app_noindex)" != "true" ]; then
-    rm -rf ${PWD}/web/app/mu-plugins/bedrock-disallow-indexing
+    composer remove roots/bedrock-disallow-indexing --update-no-dev --quiet
   fi  
 elif [ "$(wpi_yq init.workflow)" == "wp-cli" ]; then
   # Get current env from arg if exist
