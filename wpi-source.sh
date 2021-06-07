@@ -144,10 +144,10 @@ wpi_yq() {
 # helper for shell scripts array
 shell_runner() {
   shell_array=$1
-  cur_env=$2
 
   # create yml with current environment
   if [ "$shell_array" == "before_install" ]; then
+    cur_env=$2
     echo "cur_env: $cur_env" > wpi-env.yml
   fi
 
